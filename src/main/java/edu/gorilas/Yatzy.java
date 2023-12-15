@@ -1,6 +1,8 @@
 package edu.gorilas;
 
 
+import java.util.Arrays;
+
 public class Yatzy {
 
     public static void main(String[] args) {
@@ -15,6 +17,7 @@ public class Yatzy {
     static final int SIX = 6;
     static final int YATZY_SCORE = 50;
     static final int NULL_SCORE = 0;
+    static final int SMALL_STRAIGHT_SCORE = 15;
     public static int chance(int[] nums) {
         int score = 0;
         for (int num : nums) {
@@ -134,23 +137,22 @@ public class Yatzy {
 
 
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5)
-        {
-            int[] tallies;
-            tallies = new int[6];
-            tallies[d1-1] += 1;
-            tallies[d2-1] += 1;
-            tallies[d3-1] += 1;
-            tallies[d4-1] += 1;
-            tallies[d5-1] += 1;
-            if (tallies[0] == 1 &&
-                    tallies[1] == 1 &&
-                    tallies[2] == 1 &&
-                    tallies[3] == 1 &&
-                    tallies[4] == 1)
-                return 15;
-            return 0;
+    public static int smallStraight(int[] nums) {
+        int contador = 1;
+        boolean flag = false;
+        for (int i = 1; i <= nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] == contador) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) return NULL_SCORE;
+            flag = false;
+            contador++;
         }
+        return SMALL_STRAIGHT_SCORE;
+    }
 
     public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
         {
