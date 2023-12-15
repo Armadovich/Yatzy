@@ -3,28 +3,28 @@ package edu.gorilas;
 public class Yatzy
 {
 
-    protected int[] dice;
-
     static final int ONE = 1;
     static final int TWO = 2;
     static final int THREE = 3;
     static final int FOUR = 4;
     static final int FIVE = 5;
     static final int SIX = 6;
+    static final int YATZY_SCORE = 50;
+    static final int NULL_SCORE = 0;
     public static int chance(int[] nums) {
-            int total = 0;
-            for (int num : nums) {
-                total += num;
-            }
-            return total;
+        int total = 0;
+        for (int num : nums) {
+            total += num;
+        }
+        return total;
     }
 
     public static int yatzy(int[] nums) {
         int diceValue = nums[0];
         for (int num : nums) {
-            if (num != diceValue) return 0;
+            if (num != diceValue) return NULL_SCORE;
         }
-        return 50;
+        return YATZY_SCORE;
     }
     public static int ones(int[] nums) {
         int sum = 0;
@@ -51,16 +51,6 @@ public class Yatzy
         }
 
 
-    public Yatzy(int d1, int d2, int d3, int d4, int _5)
-        {
-            dice = new int[5];
-            dice[0] = d1;
-            dice[1] = d2;
-            dice[2] = d3;
-            dice[3] = d4;
-            dice[4] = _5;
-        }
-
     public static int fours(int[] nums) {
         int sum = 0;
         for (int num : nums) {
@@ -79,27 +69,25 @@ public class Yatzy
     }
 
     public static int sixes(int[] nums) {
-            int sum = 0;
-            for (int num : nums) {
-                if (num == SIX) sum += SIX;
-            }
-            return sum;
+        int sum = 0;
+        for (int num : nums) {
+            if (num == SIX) sum += SIX;
+        }
+        return sum;
     }
 
-    public static int score_pair(int d1, int d2, int d3, int d4, int d5)
-        {
-            int[] counts = new int[6];
-            counts[d1-1]++;
-            counts[d2-1]++;
-            counts[d3-1]++;
-            counts[d4-1]++;
-            counts[d5-1]++;
-            int at;
-            for (at = 0; at != 6; at++)
-                if (counts[6-at-1] >= 2)
-                    return (6-at)*2;
-            return 0;
+    public static int score_pair(int[] nums) {
+        int contador = 0;
+        for (int i = 6; i > 0; i--) {
+            for (int num : nums) {
+                if (num == i) contador++;
+                if (contador == 2) return i * 2;
+            }
+            contador = 0;
         }
+        return NULL_SCORE;
+
+    }
 
     public static int two_pair(int d1, int d2, int d3, int d4, int d5)
         {
