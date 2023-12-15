@@ -3,7 +3,6 @@ package edu.gorilas;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YatzyTest {
 
@@ -84,7 +83,7 @@ public class YatzyTest {
     }
 
     @Test
-    public void test_four_of_a_knd() {
+    public void test_four_of_a_kind() {
         assertEquals(12, Yatzy.four_of_a_kind(new int[]{3,3,3,3,5}));
         assertEquals(20, Yatzy.four_of_a_kind(new int[]{5,5,5,4,5}));
         assertEquals(9, Yatzy.three_of_a_kind(new int[]{3,3,3,3,3}));
@@ -106,7 +105,9 @@ public class YatzyTest {
 
     @Test
     public void test_fullHouse() {
-        assertEquals(18, Yatzy.fullHouse(6,2,2,2,6));
-        assertEquals(0, Yatzy.fullHouse(2,3,4,5,6));
+        assertEquals(18, Yatzy.fullHouse(new int[]{6,2,2,2,6}));
+        assertEquals(22, Yatzy.fullHouse(new int[]{6,6,2,2,6}));
+        assertEquals(0, Yatzy.fullHouse(new int[]{2,3,4,5,6}));
+        assertEquals(0, Yatzy.fullHouse(new int[]{1,1,1,1,1}));
     }
 }

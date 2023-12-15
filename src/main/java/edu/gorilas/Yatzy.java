@@ -5,9 +5,6 @@ import java.util.Arrays;
 
 public class Yatzy {
 
-    public static void main(String[] args) {
-        System.out.println(two_pair(new int[]{3,3,5,4,5}));
-    }
 
     static final int ONE = 1;
     static final int TWO = 2;
@@ -19,6 +16,7 @@ public class Yatzy {
     static final int NULL_SCORE = 0;
     static final int SMALL_STRAIGHT_SCORE = 15;
     static final int LARGE_STRAIGHT_SCORE = 20;
+
     public static int chance(int[] nums) {
         int score = 0;
         for (int num : nums) {
@@ -86,10 +84,10 @@ public class Yatzy {
 
     public static int score_pair(int[] nums) {
         int contador = 0;
-        for (int i = 6; i > 0; i--) {
+        for (int i = SIX; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
-                if (contador == 2) return i * 2;
+                if (contador == TWO) return i * TWO;
             }
             contador = 0;
         }
@@ -99,7 +97,7 @@ public class Yatzy {
     public static int two_pair(int[] nums) {
         int contador = 0;
         int score = 0;
-        for (int i = 6; i > 0; i--) {
+        for (int i = SIX; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
                 if (contador == TWO) {
@@ -114,7 +112,7 @@ public class Yatzy {
 
     public static int three_of_a_kind(int[] nums) {
         int contador = 0;
-        for (int i = 6; i > 0; i--) {
+        for (int i = SIX; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
                 if (contador == THREE) return i * THREE;
@@ -126,7 +124,7 @@ public class Yatzy {
 
     public static int four_of_a_kind(int[] nums) {
         int contador = 0;
-        for (int i = 6; i > 0; i--) {
+        for (int i = SIX; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
                 if (contador == FOUR) return i * FOUR;
@@ -139,7 +137,7 @@ public class Yatzy {
 
 
     public static int smallStraight(int[] nums) {
-        int contador = 1;
+        int contador = ONE;
         boolean flag = false;
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
@@ -156,7 +154,7 @@ public class Yatzy {
     }
 
     public static int largeStraight(int[] nums) {
-        int contador = 2;
+        int contador = TWO;
         boolean flag = false;
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
@@ -172,41 +170,35 @@ public class Yatzy {
         return LARGE_STRAIGHT_SCORE;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5)
-        {
-            int[] tallies;
-            boolean _2 = false;
-            int i;
-            int _2_at = 0;
-            boolean _3 = false;
-            int _3_at = 0;
-
-
-
-
-            tallies = new int[6];
-            tallies[d1-1] += 1;
-            tallies[d2-1] += 1;
-            tallies[d3-1] += 1;
-            tallies[d4-1] += 1;
-            tallies[d5-1] += 1;
-
-            for (i = 0; i != 6; i += 1)
-                if (tallies[i] == 2) {
-                    _2 = true;
-                    _2_at = i+1;
-                }
-
-            for (i = 0; i != 6; i += 1)
-                if (tallies[i] == 3) {
-                    _3 = true;
-                    _3_at = i+1;
-                }
-
-            if (_2 && _3)
-                return _2_at * 2 + _3_at * 3;
-            else
-                return 0;
+    public static int fullHouse(int[] nums) {
+        int startingDice = nums[0];
+        boolean flag = true;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != startingDice) {
+                flag = false;
+                break;
+            }
         }
+        if (flag) return NULL_SCORE;
+
+        if (three_of_a_kind(nums) != 0 && score_pair(nums) != 0) {
+            if (three_of_a_kind(nums)/THREE == score_pair(nums)/TWO){
+                if (findLowerPair(nums) != score_pair(nums)) return findLowerPair(nums) + three_of_a_kind(nums);
+            } else if (three_of_a_kind(nums)/THREE != score_pair(nums)/TWO) return score_pair(nums) + three_of_a_kind(nums);
+        }
+        return NULL_SCORE;
     }
+
+    public static int findLowerPair(int[] nums){
+        int contador = 0;
+        for (int i = 0; i <= SIX; i++) {
+            for (int num : nums) {
+                if (num == i) contador++;
+                if (contador == TWO) return i * TWO;
+            }
+            contador = 0;
+        }
+        return NULL_SCORE;
+    }
+}
 
