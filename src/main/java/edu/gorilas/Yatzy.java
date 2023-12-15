@@ -5,54 +5,49 @@ public class Yatzy
 
     protected int[] dice;
 
-
-
+    static final int ONE = 1;
+    static final int TWO = 2;
+    static final int THREE = 3;
+    static final int FOUR = 4;
+    static final int FIVE = 5;
+    static final int SIX = 6;
     public static int chance(int[] nums) {
             int total = 0;
             for (int num : nums) {
                 total += num;
             }
             return total;
-        }
+    }
 
     public static int yatzy(int[] nums) {
         int diceValue = nums[0];
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != diceValue) return 0;
+        for (int num : nums) {
+            if (num != diceValue) return 0;
         }
         return 50;
+    }
+    public static int ones(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            if (num == ONE) sum += ONE;
         }
-    public static int ones(int d1, int d2, int d3, int d4, int d5) {
-            int sum = 0;
-            if (d1 == 1) sum++;
-            if (d2 == 1) sum++;
-            if (d3 == 1) sum++;
-            if (d4 == 1) sum++;
-            if (d5 == 1)
-                sum++;
+        return sum;
+    }
 
-            return sum;
+    public static int twos(int[] nums)  {
+        int sum = 0;
+        for (int num : nums) {
+            if (num == TWO) sum += TWO;
         }
+        return sum;
+    }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-            int sum = 0;
-            if (d1 == 2) sum += 2;
-            if (d2 == 2) sum += 2;
-            if (d3 == 2) sum += 2;
-            if (d4 == 2) sum += 2;
-            if (d5 == 2) sum += 2;
-            return sum;
+    public static int threes(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            if (num == THREE) sum += THREE;
         }
-
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-            int s;
-            s = 0;
-            if (d1 == 3) s += 3;
-            if (d2 == 3) s += 3;
-            if (d3 == 3) s += 3;
-            if (d4 == 3) s += 3;
-            if (d5 == 3) s += 3;
-            return s;
+        return sum;
         }
 
 
@@ -66,36 +61,30 @@ public class Yatzy
             dice[4] = _5;
         }
 
-    public int fours()
-        {
-            int sum;
-            sum = 0;
-            for (int at = 0; at != 5; at++) {
-                if (dice[at] == 4) {
-                    sum += 4;
-                }
+    public static int fours(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            if (num == FOUR) sum += FOUR;
+        }
+        return sum;
+        }
+
+    public static int fives(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            if (num == FIVE) sum += FIVE;
+        }
+        return sum;
+
+    }
+
+    public static int sixes(int[] nums) {
+            int sum = 0;
+            for (int num : nums) {
+                if (num == SIX) sum += SIX;
             }
             return sum;
-        }
-
-    public int fives()
-        {
-            int s = 0;
-            int i;
-            for (i = 0; i < dice.length; i++)
-                if (dice[i] == 5)
-                    s = s + 5;
-            return s;
-        }
-
-    public int sixes()
-        {
-            int sum = 0;
-            for (int at = 0; at < dice.length; at++)
-                if (dice[at] == 6)
-                    sum = sum + 6;
-            return sum;
-        }
+    }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
         {
