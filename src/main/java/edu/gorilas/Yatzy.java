@@ -1,7 +1,11 @@
 package edu.gorilas;
 
-public class Yatzy
-{
+
+public class Yatzy {
+
+    public static void main(String[] args) {
+        System.out.println(two_pair(new int[]{3,3,5,4,5}));
+    }
 
     static final int ONE = 1;
     static final int TWO = 2;
@@ -12,68 +16,68 @@ public class Yatzy
     static final int YATZY_SCORE = 50;
     static final int NULL_SCORE = 0;
     public static int chance(int[] nums) {
-        int total = 0;
+        int score = 0;
         for (int num : nums) {
-            total += num;
+            score += num;
         }
-        return total;
+        return score;
     }
 
     public static int yatzy(int[] nums) {
-        int diceValue = nums[0];
+        int startValue = nums[0];
         for (int num : nums) {
-            if (num != diceValue) return NULL_SCORE;
+            if (num != startValue) return NULL_SCORE;
         }
         return YATZY_SCORE;
     }
     public static int ones(int[] nums) {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == ONE) sum += ONE;
+            if (num == ONE) score += ONE;
         }
-        return sum;
+        return score;
     }
 
     public static int twos(int[] nums)  {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == TWO) sum += TWO;
+            if (num == TWO) score += TWO;
         }
-        return sum;
+        return score;
     }
 
     public static int threes(int[] nums) {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == THREE) sum += THREE;
+            if (num == THREE) score += THREE;
         }
-        return sum;
+        return score;
         }
 
 
     public static int fours(int[] nums) {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == FOUR) sum += FOUR;
+            if (num == FOUR) score += FOUR;
         }
-        return sum;
+        return score;
         }
 
     public static int fives(int[] nums) {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == FIVE) sum += FIVE;
+            if (num == FIVE) score += FIVE;
         }
-        return sum;
+        return score;
 
     }
 
     public static int sixes(int[] nums) {
-        int sum = 0;
+        int score = 0;
         for (int num : nums) {
-            if (num == SIX) sum += SIX;
+            if (num == SIX) score += SIX;
         }
-        return sum;
+        return score;
     }
 
     public static int score_pair(int[] nums) {
@@ -86,29 +90,23 @@ public class Yatzy
             contador = 0;
         }
         return NULL_SCORE;
-
     }
 
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5)
-        {
-            int[] counts = new int[6];
-            counts[d1-1]++;
-            counts[d2-1]++;
-            counts[d3-1]++;
-            counts[d4-1]++;
-            counts[d5-1]++;
-            int n = 0;
-            int score = 0;
-            for (int i = 0; i < 6; i += 1)
-                if (counts[6-i-1] >= 2) {
-                    n++;
-                    score += (6-i);
+    public static int two_pair(int[] nums) {
+        int contador = 0;
+        int score = 0;
+        for (int i = 6; i > 0; i--) {
+            for (int num : nums) {
+                if (num == i) contador++;
+                if (contador == 2) {
+                    score += (i * 2);
+                    contador = 0;
                 }
-            if (n == 2)
-                return score * 2;
-            else
-                return 0;
+            }
+            contador = 0;
         }
+        return score;
+    }
 
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
         {
