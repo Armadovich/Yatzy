@@ -98,8 +98,8 @@ public class Yatzy {
         for (int i = 6; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
-                if (contador == 2) {
-                    score += (i * 2);
+                if (contador == TWO) {
+                    score += (i * TWO);
                     contador = 0;
                 }
             }
@@ -113,28 +113,24 @@ public class Yatzy {
         for (int i = 6; i > 0; i--) {
             for (int num : nums) {
                 if (num == i) contador++;
-                if (contador == 3) return i * 3;
+                if (contador == THREE) return i * THREE;
             }
             contador = 0;
         }
         return NULL_SCORE;
-
     }
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
-        {
-            int[] tallies;
-            tallies = new int[6];
-            tallies[_1-1]++;
-            tallies[_2-1]++;
-            tallies[d3-1]++;
-            tallies[d4-1]++;
-            tallies[d5-1]++;
-            for (int i = 0; i < 6; i++)
-                if (tallies[i] >= 4)
-                    return (i+1) * 4;
-            return 0;
+    public static int four_of_a_kind(int[] nums) {
+        int contador = 0;
+        for (int i = 6; i > 0; i--) {
+            for (int num : nums) {
+                if (num == i) contador++;
+                if (contador == FOUR) return i * FOUR;
+            }
+            contador = 0;
         }
+        return NULL_SCORE;
+    }
 
 
 
