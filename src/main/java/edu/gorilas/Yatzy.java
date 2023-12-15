@@ -18,6 +18,7 @@ public class Yatzy {
     static final int YATZY_SCORE = 50;
     static final int NULL_SCORE = 0;
     static final int SMALL_STRAIGHT_SCORE = 15;
+    static final int LARGE_STRAIGHT_SCORE = 20;
     public static int chance(int[] nums) {
         int score = 0;
         for (int num : nums) {
@@ -140,7 +141,7 @@ public class Yatzy {
     public static int smallStraight(int[] nums) {
         int contador = 1;
         boolean flag = false;
-        for (int i = 1; i <= nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
                 if (nums[j] == contador) {
                     flag = true;
@@ -154,23 +155,22 @@ public class Yatzy {
         return SMALL_STRAIGHT_SCORE;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
-        {
-            int[] tallies;
-            tallies = new int[6];
-            tallies[d1-1] += 1;
-            tallies[d2-1] += 1;
-            tallies[d3-1] += 1;
-            tallies[d4-1] += 1;
-            tallies[d5-1] += 1;
-            if (tallies[1] == 1 &&
-                    tallies[2] == 1 &&
-                    tallies[3] == 1 &&
-                    tallies[4] == 1
-                    && tallies[5] == 1)
-                return 20;
-            return 0;
+    public static int largeStraight(int[] nums) {
+        int contador = 2;
+        boolean flag = false;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] == contador) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) return NULL_SCORE;
+            flag = false;
+            contador++;
         }
+        return LARGE_STRAIGHT_SCORE;
+    }
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5)
         {
